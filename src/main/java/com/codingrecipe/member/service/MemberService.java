@@ -5,6 +5,8 @@ import com.codingrecipe.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -13,5 +15,25 @@ public class MemberService {
 
     public int save(MemberDTO memberDTO) {
         return memberRepository.save(memberDTO);
+    }
+
+    public boolean login(MemberDTO memberDTO){
+        MemberDTO loginMember = memberRepository.login(memberDTO);
+        if(loginMember != null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public List<MemberDTO> findAll(){
+        return memberRepository.findAll();
+    }
+    public MemberDTO findById(Long id){
+        System.out.println("Service findById " + id);
+        return memberRepository.findById(id);
+    }
+    public void delete(Long id){
+        memberRepository.delete(id);
     }
 }
